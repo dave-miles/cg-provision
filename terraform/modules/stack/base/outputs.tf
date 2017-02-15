@@ -6,6 +6,9 @@ output "vpc_id" {
 output "vpc_cidr" {
     value = "${module.vpc.vpc_cidr}"
 }
+output "vpc_region" {
+  value ="${var.aws_default_region}"
+}
 
 /* Private network */
 output "private_subnet_az1" {
@@ -14,6 +17,19 @@ output "private_subnet_az1" {
 output "private_subnet_az2" {
   value = "${module.vpc.private_subnet_az2}"
 }
+output "private_subnet_az1_zone" {
+  value = "${module.vpc.private_subnet_az1_zone}"
+}
+output "private_subnet_az2_zone" {
+  value = "${module.vpc.private_subnet_az2_zone}"
+}
+output "private_subnet_az1_cidr" {
+  value = "${module.vpc.private_subnet_az1_cidr}"
+}
+output "private_subnet_az2_cidr" {
+  value = "${module.vpc.private_subnet_az2_cidr}"
+}
+
 output "private_route_table_az1" {
   value = "${module.vpc.private_route_table_az1}"
 }

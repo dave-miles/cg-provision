@@ -6,6 +6,9 @@ output "vpc_id" {
 output "vpc_cidr" {
     value = "${module.base.vpc_cidr}"
 }
+output "vpc_region" {
+    value = "${module.base.vpc_region}"
+}
 
 output "tooling_vpc_id" {
     value = "${data.terraform_remote_state.target_vpc.vpc_id}"
@@ -21,6 +24,19 @@ output "private_subnet_az1" {
 output "private_subnet_az2" {
   value = "${module.base.private_subnet_az2}"
 }
+output "private_subnet_az1_zone" {
+  value = "${module.base.private_subnet_az1_zone}"
+}
+output "private_subnet_az2_zone" {
+  value = "${module.base.private_subnet_az2_zone}"
+}
+output "private_subnet_az1_cidr" {
+  value = "${module.base.private_subnet_az1_cidr}"
+}
+output "private_subnet_az2_cidr" {
+  value = "${module.base.private_subnet_az2_cidr}"
+}
+
 output "private_route_table_az1" {
   value = "${module.base.private_route_table_az1}"
 }

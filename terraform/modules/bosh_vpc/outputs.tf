@@ -16,6 +16,28 @@ output "private_subnet_az2" {
   value = "${aws_subnet.az2_private.id}"
 }
 
+output "private_subnet_az1_zone" {
+  value = "${aws_subnet.az1_private.availability_zone}"
+}
+
+output "private_subnet_az2_zone" {
+  value = "${aws_subnet.az2_private.availability_zone}"
+}
+
+output "private_subnet_az1_cidr" {
+  value = "${aws_subnet.az1_private.cidr_block}"
+}
+
+output "private_subnet_az2_cidr" {
+  value = "${aws_subnet.az2_private.cidr_block}"
+}
+output "private_subnet_az1_gateway" {
+  value = "${aws_instance.az1_private_nat.private_ip}"
+}
+output "private_subnet_az2_gateway" {
+  value = "${aws_instance.az2_private_nat.private_ip}"
+}
+
 output "private_route_table_az1" {
   value = "${aws_route_table.az1_private_route_table.id}"
 }
@@ -23,6 +45,9 @@ output "private_route_table_az1" {
 output "private_route_table_az2" {
   value = "${aws_route_table.az2_private_route_table.id}"
 }
+
+
+private_ip -
 
 /* Public network */
 output "public_subnet_az1" {
