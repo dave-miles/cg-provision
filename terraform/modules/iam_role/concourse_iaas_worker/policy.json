@@ -1,0 +1,83 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketAcl",
+        "s3:GetBucketLocation",
+        "s3:GetBucketNotification",
+        "s3:GetBucketPolicy",
+        "s3:GetBucketRequestPayment",
+        "s3:GetBucketVersioning",
+        "s3:GetObject",
+        "s3:GetObjectAcl",
+        "s3:GetObjectVersion",
+        "s3:GetObjectVersionAcl",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:ListBucketVersions",
+        "s3:ListMultipartUploadParts"
+      ],
+      "Resource": [
+        "arn:${aws_partition}:s3:::${varz_bucket}",
+        "arn:${aws_partition}:s3:::${varz_bucket}/*",
+        "arn:${aws_partition}:s3:::${varz_staging_bucket}",
+        "arn:${aws_partition}:s3:::${varz_staging_bucket}/*",
+        "arn:${aws_partition}:s3:::${bosh_release_bucket}",
+        "arn:${aws_partition}:s3:::${bosh_release_bucket}/*",
+        "arn:${aws_partition}:s3:::${stemcell_bucket}",
+        "arn:${aws_partition}:s3:::${stemcell_bucket}/*",
+        "arn:${aws_partition}:s3:::${terraform_state_bucket}",
+        "arn:${aws_partition}:s3:::${terraform_state_bucket}/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject",
+        "s3:PutObjectAcl",
+        "s3:PutObjectVersionAcl"
+      ],
+      "Resource": [
+        "arn:${aws_partition}:s3:::${varz_bucket}/state/*",
+        "arn:${aws_partition}:s3:::${terraform_state_bucket}/*"
+      ]
+    },
+    {
+      "Action": [
+        "ec2:AssociateAddress",
+        "ec2:AttachVolume",
+        "ec2:CreateVolume",
+        "ec2:DeleteSnapshot",
+        "ec2:DeleteVolume",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeImages",
+        "ec2:DescribeInstances",
+        "ec2:DescribeRegions",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVolumes",
+        "ec2:DetachVolume",
+        "ec2:CreateSnapshot",
+        "ec2:CreateTags",
+        "ec2:RunInstances",
+        "ec2:TerminateInstances",
+        "ec2:RegisterImage",
+        "ec2:DeregisterImage"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "elasticloadbalancing:*"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}

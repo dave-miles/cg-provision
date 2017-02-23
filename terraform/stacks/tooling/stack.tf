@@ -164,6 +164,17 @@ module "concourse_worker_role" {
   terraform_state_bucket = "terraform-state"
 }
 
+module "concourse_iaas_worker_role" {
+  source = "../../modules/iam_role/concourse_iaas_worker"
+  role_name = "concourse-iaas-worker"
+  aws_partition = "${var.aws_partition}"
+  varz_bucket = "cloud-gov-varz"
+  varz_staging_bucket = "cloud-gov-varz-stage"
+  bosh_release_bucket = "cloud-gov-bosh-releases"
+  stemcell_bucket = "cg-stemcell-images"
+  terraform_state_bucket = "terraform-state"
+}
+
 module "kubernetes_master_role" {
   source = "../../modules/iam_role/kubernetes_master"
   stack_description = "${var.stack_description}"
