@@ -13,6 +13,8 @@
  *  rds_security_groups
  */
 
+/* Note: Used both in 18F/cg-provision and 18F/aws-broker */
+
 resource "aws_db_instance" "rds_database" {
   engine               = "${var.rds_db_engine}"
   engine_version       = "${var.rds_db_engine_version}"
@@ -41,7 +43,9 @@ resource "aws_db_instance" "rds_database" {
 
   db_subnet_group_name = "${var.rds_subnet_group}"
   vpc_security_group_ids = ["${split(",", var.rds_security_groups)}"]
-  parameter_group_name = "${aws_db_parameter_group.parameter_group.id}"
+  parameter_group_name = "${var.rds_db_engine == "postgres" ?
+    aws_db_parameter_group.parameter_group_postgres.id :
+    aws_db_parameter_group.parameter_group_mysql.id}"
 
   tags {
     Name = "${var.stack_description}"
