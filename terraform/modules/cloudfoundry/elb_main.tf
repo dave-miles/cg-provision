@@ -31,3 +31,14 @@ resource "aws_elb" "cloudfoundry_elb_main" {
     Name = "${var.stack_description}-CloudFoundry-Main"
   }
 }
+
+resource "aws_lb_ssl_negotiation_policy" "policy" {
+  name = "${var.stack_description}-CloudFoundry-Main-policy"
+  load_balancer = "${aws_elb.cloudfoundry_elb_main.id}"
+  port = 443
+
+  attribute {
+    name = "DES-CBC3-SHA"
+    value = "false"
+  }
+}
