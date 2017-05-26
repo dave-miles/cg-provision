@@ -213,11 +213,6 @@ module "concourse_worker_policy" {
   billing_bucket = "cg-billing-*"
 }
 
-module "concourse_iaas_worker_policy" {
-  source = "../../modules/iam_role_policy/concourse_iaas_worker"
-  policy_name = "concourse-iaas-worker"
-}
-
 module "default_role" {
   source = "../../modules/iam_role"
   role_name = "${var.stack_description}-default"
@@ -327,8 +322,8 @@ resource "aws_iam_policy_attachment" "concourse_worker" {
 }
 
 resource "aws_iam_policy_attachment" "concourse_iaas_worker" {
-  name = "concourse_worker"
-  policy_arn = "${module.concourse_iaas_worker_policy.arn}"
+  name = "concourse_iaas_worker"
+  policy_arn = "arn:aws-us-gov:iam::aws:policy/AdministratorAccess"
   roles = [
     "${module.concourse_iaas_worker_role.role_name}"
   ]
