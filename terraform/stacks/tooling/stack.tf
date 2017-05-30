@@ -321,10 +321,17 @@ resource "aws_iam_policy_attachment" "concourse_worker" {
   ]
 }
 
-resource "aws_iam_policy_attachment" "concourse_iaas_worker" {
-  name = "concourse_iaas_worker"
+module "operators" {
+  source = "../../modules/operators"
+}
+
+resource "aws_iam_policy_attachment" "admin" {
+  name = "admin"
   policy_arn = "arn:aws-us-gov:iam::aws:policy/AdministratorAccess"
   roles = [
-    "${module.concourse_iaas_worker_role.role_name}"
+    "${concat(
+      module.operators.operators,
+      list(module.concourse_iaas_worker_role.role_name, "terraform-provision")
+    )}"
   ]
 }

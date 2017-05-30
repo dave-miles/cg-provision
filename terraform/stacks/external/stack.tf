@@ -13,3 +13,19 @@ module "limit_check_user" {
   source = "../../modules/iam_user/limit_check_user"
   username = "limit-check-${var.stack_description}"
 }
+
+module "operators" {
+  source = "../../modules/operators"
+}
+
+resource "aws_iam_policy_attachment" "admin" {
+  name = "admin"
+  count = "${var.stack_description == "production" ? 1 : 0}"
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  roles = [
+    "${concat(
+      module.operators.operators,
+      list("terraform-provision")
+    )}"
+  ]
+}
